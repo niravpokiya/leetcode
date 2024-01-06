@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int closetTarget(vector<string>& words, string target, int startIndex) {
+        int min = 0;
+        int dist = 0;
+        int j = startIndex;
+        //checking distance by going back
+       while(words[j]!=target)
+       {
+           dist++;
+           j =( j-1+words.size())%words.size();
+           if(j == startIndex)
+           return -1;
+       }
+      min  = dist;
+       dist = 0;
+          j = startIndex;
+        //checking distance by going forward
+       while(words[j]!=target)
+       {
+           dist++;
+           j =(j+1)%words.size();
+           if(j == startIndex)
+           return -1;
+       }
+       if(dist<min)
+       min = dist;
+         return min;
+    }
+};
