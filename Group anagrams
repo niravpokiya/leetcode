@@ -1,0 +1,63 @@
+class Solution {
+    bool ifsame(int count1[],int count2[])
+    {
+        for(int i = 0; i<26; i++)
+        {
+            if(count1[i]!=count2[i])
+            return 0;
+        }
+        return 1;
+    }
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+         vector<vector<string>> result;
+         int s1[strs.size()][26];
+         //initialize to zero
+         for(int i = 0; i<strs.size(); i++)
+         for(int j = 0; j<26; j++)
+         s1[i][j] = 0;
+    //storing from strings individual char
+         for(int i = 0; i<strs.size(); i++)
+              {
+                  for(int j = 0; j<strs[i].length(); j++)
+                  {
+                      s1[i][strs[i][j] - 'a']++;
+                  }
+              }
+         for(int i = 0; i<strs.size(); i++)
+         {
+             //checking if string empty than remove this element from vector
+                 if(strs[i] == " ")
+                 {
+                 swap(strs[i],strs[strs.size() - 1]);
+                 strs.pop_back();
+                 i--;
+                 continue;
+                 } 
+                  //temporary vector               
+                vector<string> tmp;
+                tmp.push_back(strs[i]);
+             //one step move further from ith element because we dont want same element 
+                         for(int j = i+1;j < strs.size(); j++)
+                         {
+                               if(strs[j] == " ")
+                                 {
+                                 swap(strs[j],strs[strs.size() - 1]);
+                                 strs.pop_back();
+                                 j--;
+                                 continue;
+                                 }
+                               
+                              //second string as arra
+                              if(ifsame(s1[i],s1[j]))
+                              {
+                                  tmp.push_back(strs[j]);
+                                  strs[j] = " ";
+                              }
+                         }
+             result.push_back(tmp);
+             tmp.clear();
+         }
+         return result;
+    }
+};
