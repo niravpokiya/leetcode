@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int countDigits(int num) {
+         int tmp = num;
+         int digits = 0;
+         while(tmp!=0)
+         {
+             if(num%(tmp%10) == 0)
+             digits++;
+             tmp/=10;
+         }
+         return digits;
+    }
+};
