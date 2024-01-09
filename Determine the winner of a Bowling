@@ -1,0 +1,39 @@
+class Solution {
+    int sumofpins(vector<int> p)
+    {
+        int sum = 0;
+      
+        for(int i = 0; i<p.size(); i++)
+        {
+            if(i==1) 
+            {
+               if(p[i-1] == 10)
+               {
+                   sum = sum + 2 * p[i];
+                   continue;
+               }
+            }
+            if(i>=2)
+            {
+                if((p[i-1] ==10 )|| p[i-2] == 10)
+              {  sum = sum + (2 * p[i]);
+                continue;}
+            }
+             
+            sum = sum + p[i];
+        }
+        return sum;
+    }
+public:
+    int isWinner(vector<int>& player1, vector<int>& player2) {
+        int p1 = sumofpins(player1);
+         int p2 = sumofpins(player2);
+        if(p1>p2)
+        return 1;
+        else if(p1<p2)
+        return 2;
+        else 
+        return 0;
+    }
+
+};
